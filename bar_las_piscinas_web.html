@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Bar Las Piscinas — Santa María del Páramo, León</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:#0D0D0D;color:#fff;font-family:'Inter',sans-serif}
+a{color:inherit;text-decoration:none}
+nav{position:fixed;top:0;left:0;width:100%;z-index:1000;background:#0D0D0D;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;border-bottom:1px solid #1a1a1a}
+.nav-logo{font-family:'Bebas Neue',cursive;font-size:1.6rem;letter-spacing:2px}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{font-size:.875rem;font-weight:600;color:#ccc;text-transform:uppercase;letter-spacing:1px;transition:color .2s}
+.nav-links a:hover{color:#fff}
+.btn-call{background:#CC1C1C;color:#fff;padding:.5rem 1.25rem;font-weight:700;text-transform:uppercase;font-size:.8rem;letter-spacing:1px;border:none;cursor:pointer;font-family:'Inter',sans-serif}
+.hamburger{display:none;background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer}
+#hero{height:100vh;position:relative;display:flex;align-items:center;justify-content:center;text-align:center}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1600') center/cover;filter:brightness(.2)}
+.hero-content{position:relative;z-index:1;padding:2rem}
+.hero-title{font-family:'Bebas Neue',cursive;font-size:clamp(4rem,10vw,9rem);line-height:1;letter-spacing:4px}
+.hero-line{width:80px;height:4px;background:#CC1C1C;margin:1.5rem auto}
+.hero-sub{font-size:1.1rem;color:#ccc;margin-bottom:2rem}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-red{background:#CC1C1C;color:#fff;padding:.75rem 1.75rem;font-weight:700;text-transform:uppercase;font-size:.85rem;letter-spacing:1px;border:none;cursor:pointer;font-family:'Inter',sans-serif;display:inline-block}
+.btn-outline{background:transparent;color:#fff;padding:.75rem 1.75rem;font-weight:700;text-transform:uppercase;font-size:.85rem;letter-spacing:1px;border:2px solid #fff;cursor:pointer;font-family:'Inter',sans-serif;display:inline-block}
+#about{background:#111;padding:5rem 2rem}
+.container{max-width:1100px;margin:0 auto}
+.section-badge{display:inline-block;background:#CC1C1C;color:#fff;font-weight:700;text-transform:uppercase;font-size:.85rem;letter-spacing:2px;padding:.4rem 1.25rem;margin-bottom:1.5rem}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.about-text p{color:#ccc;line-height:1.8;margin-bottom:1.5rem;font-size:1rem}
+.badges{display:flex;flex-wrap:wrap;gap:.75rem}
+.badge{background:#1A1A1A;border:1px solid #333;padding:.4rem .9rem;font-size:.85rem;border-radius:2rem}
+.about-img{width:100%;height:380px;object-fit:cover}
+#menu{background:#0D0D0D;padding:5rem 2rem}
+.section-title{font-family:'Bebas Neue',cursive;font-size:2.5rem;margin-bottom:2rem}
+.tabs{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
+.tab-btn{background:#1A1A1A;color:#fff;border:none;padding:.6rem 1.25rem;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s}
+.tab-btn.active{background:#CC1C1C}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem}
+.menu-card{background:#1A1A1A;border-left:3px solid #CC1C1C;padding:1rem 1.25rem}
+.menu-card h4{font-size:.95rem;font-weight:700;margin-bottom:.25rem}
+.menu-card p{color:#888;font-size:.8rem;margin-bottom:.5rem}
+.menu-card .price{color:#CC1C1C;font-weight:700;font-size:1rem}
+.personaliza{border:2px solid #CC1C1C;padding:1.5rem;margin-top:2rem;background:#111}
+.personaliza h3{color:#CC1C1C;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:1rem;font-size:.9rem}
+.personaliza-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.75rem}
+.personaliza-item{display:flex;justify-content:space-between;font-size:.9rem}
+.personaliza-item span:last-child{color:#CC1C1C;font-weight:700}
+#highlights{background:#8B0000;padding:2rem}
+.highlights-inner{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;align-items:center}
+.highlight-item{text-align:center;font-weight:700;text-transform:uppercase;letter-spacing:1px;font-size:.95rem}
+#gallery{background:#0D0D0D;padding:5rem 2rem}
+.gallery-grid{columns:3;gap:1rem}
+.gallery-grid img{width:100%;margin-bottom:1rem;cursor:pointer;transition:opacity .2s;display:block}
+.gallery-grid img:hover{opacity:.8}
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;align-items:center;justify-content:center}
+.lightbox.open{display:flex}
+.lightbox img{max-width:90vw;max-height:90vh;object-fit:contain}
+.lightbox-close{position:fixed;top:1.5rem;right:2rem;font-size:2.5rem;cursor:pointer;color:#fff;line-height:1}
+#reviews{background:#0D0D0D;padding:5rem 2rem}
+.rating-badge{display:inline-flex;align-items:center;gap:.5rem;background:#1A1A1A;border:1px solid #333;padding:.5rem 1.25rem;margin-bottom:2rem;font-weight:700}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem}
+.review-card{background:#111;border-top:3px solid #CC1C1C;padding:1.25rem}
+.review-card p{color:#ccc;line-height:1.7;font-size:.9rem;margin-bottom:.75rem}
+.review-card .reviewer{color:#555;font-size:.8rem}
+#contact{background:#111;padding:5rem 2rem}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.contact-info{display:flex;flex-direction:column;gap:1.5rem}
+.contact-phone{background:#7B0000;padding:1rem 1.5rem;display:inline-flex;align-items:center;gap:.75rem;font-size:1.4rem;font-weight:700;border-radius:2rem;width:fit-content}
+.contact-detail{display:flex;gap:.75rem;align-items:flex-start;color:#ccc}
+.contact-detail span:first-child{font-size:1.1rem;flex-shrink:0}
+.map-wrapper iframe{width:100%;height:300px;border:none;filter:grayscale(1) invert(1)}
+footer{background:#000;padding:3rem 2rem;text-align:center}
+.footer-logo{font-family:'Bebas Neue',cursive;font-size:2.5rem;letter-spacing:3px;margin-bottom:1rem}
+.footer-links{display:flex;justify-content:center;gap:2rem;margin-bottom:1rem;flex-wrap:wrap}
+.footer-links a{color:#666;font-size:.85rem;text-transform:uppercase;letter-spacing:1px}
+.footer-info{color:#444;font-size:.8rem;margin-bottom:.5rem}
+.footer-disclaimer{font-size:11px;color:#2a2a2a}
+#back-top{position:fixed;bottom:2rem;right:2rem;background:#CC1C1C;color:#fff;border:none;width:44px;height:44px;font-size:1.3rem;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:999;font-family:'Inter',sans-serif}
+#back-top.visible{display:flex}
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s}
+.fade-in.visible{opacity:1;transform:none}
+@media(max-width:768px){
+.nav-links{display:none;position:fixed;top:64px;left:0;width:100%;background:#0D0D0D;flex-direction:column;padding:2rem;gap:1.5rem;border-bottom:1px solid #1a1a1a}
+.nav-links.open{display:flex}
+.hamburger{display:block}
+.about-grid,.contact-grid{grid-template-columns:1fr}
+.gallery-grid{columns:2}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Bar Las Piscinas</div>
+  <div class="nav-links" id="navLinks">
+    <a href="#about">Inicio</a>
+    <a href="#menu">Carta</a>
+    <a href="#gallery">Galería</a>
+    <a href="#reviews">Reseñas</a>
+    <a href="#contact">Contacto</a>
+    <a href="tel:613768023" class="btn-call">Llámanos</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menú">☰</button>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">BAR LAS PISCINAS</h1>
+    <div class="hero-line"></div>
+    <p class="hero-sub">Bar Restaurante · Santa María del Páramo, León</p>
+    <div class="hero-btns">
+      <a href="#menu" class="btn-red">Ver la Carta</a>
+      <a href="tel:613768023" class="btn-outline">Llamar Ahora</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="about-grid fade-in">
+      <div class="about-text">
+        <div class="section-badge">Quiénes Somos</div>
+        <p>Bar Las Piscinas es un bar restaurante situado en Santa María del Páramo, León. Ofrecemos una carta variada con raciones, hamburguesas, bocadillos, combinados, ensaladas y mucho más, a precios muy asequibles.</p>
+        <div class="badges">
+          <span class="badge">🐙 Pulpo</span>
+          <span class="badge">🍟 Patatas Ali-Oli</span>
+          <span class="badge">🍔 Hamburguesas</span>
+          <span class="badge">🥗 Ensaladas</span>
+          <span class="badge">🥪 Bocadillos</span>
+        </div>
+      </div>
+      <img class="about-img" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800" alt="Interior del bar"/>
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="container">
+    <div class="section-badge">Nuestra Carta</div>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="raciones">Raciones</button>
+      <button class="tab-btn" data-tab="sandwiches">Sándwiches</button>
+      <button class="tab-btn" data-tab="bocadillos">Bocadillos</button>
+      <button class="tab-btn" data-tab="hamburguesas">Hamburguesas</button>
+      <button class="tab-btn" data-tab="combinados">Combinados</button>
+      <button class="tab-btn" data-tab="ensaladas">Ensaladas</button>
+    </div>
+
+    <div class="tab-panel active" id="tab-raciones">
+      <div class="menu-grid">
+        <div class="menu-card"><h4>Patatas Ali Oli</h4><p class="price">7,50€</p></div>
+        <div class="menu-card"><h4>Mejillones en salsa</h4><p class="price">8,50€</p></div>
+        <div class="menu-card"><h4>Pulpo</h4><p class="price">23,00€</p></div>
+        <div class="menu-card"><h4>Calamares</h4><p class="price">8,50€</p></div>
+        <div class="menu-card"><h4>Fingers de pollo</h4><p class="price">6,00€</p></div>
+        <div class="menu-card"><h4>Nuggets</h4><p class="price">6,00€</p></div>
+        <div class="menu-card"><h4>Palitos de queso</h4><p class="price">6,00€</p></div>
+        <div class="menu-card"><h4>Croquetas</h4><p class="price">7,00€</p></div>
+        <div class="menu-card"><h4>Nachos con salsa cheddar y pulled pork barbacoa</h4><p class="price">9,50€</p></div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-sandwiches">
+      <div class="menu-grid">
+        <div class="menu-card"><h4>Sándwich mixto</h4><p class="price">4,00€</p></div>
+        <div class="menu-card"><h4>Sándwich vegetal</h4><p>Lechuga, tomate, mayonesa y espárragos</p><p class="price">5,50€</p></div>
+        <div class="menu-card"><h4>Sándwich especial</h4><p>Lechuga, tomate, mayonesa, espárragos, jamón York y queso</p><p class="price">6,50€</p></div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-bocadillos">
+      <div class="menu-grid">
+        <div class="menu-card"><h4>Bocadillo lomo</h4><p class="price">6,50€</p></div>
+        <div class="menu-card"><h4>Bocadillo pollo</h4><p class="price">6,50€</p></div>
+        <div class="menu-card"><h4>Bocadillo bacon queso</h4><p class="price">6,50€</p></div>
+        <div class="menu-card"><h4>Bocadillo calamares</h4><p class="price">7,00€</p></div>
+        <div class="menu-card"><h4>Bocadillo embutido</h4><p class="price">5,00€</p></div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-hamburguesas">
+      <div class="menu-grid">
+        <div class="menu-card"><h4>Hamburguesa simple</h4><p>Carne de buey, jamón York y queso</p><p class="price">6,50€</p></div>
+        <div class="menu-card"><h4>Hamburguesa completa</h4><p>Carne de buey, jamón York, queso, huevo, bacon, lechuga, tomate y cebolla caramelizada</p><p class="price">9,50€</p></div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-combinados">
+      <div class="menu-grid">
+        <div class="menu-card"><h4>Nº 1 — Filete</h4><p>Patatas, huevo y ensalada</p><p class="price">12,50€</p></div>
+        <div class="menu-card"><h4>Nº 2 — Lomo</h4><p>Patatas, huevo y ensalada</p><p class="price">11,50€</p></div>
+        <div class="menu-card"><h4>Nº 3 — Pollo</h4><p>Patatas, huevo y ensalada</p><p class="price">11,50€</p></div>
+        <div class="menu-card"><h4>Nº 4 — Bacon</h4><p>Patatas, huevo y ensalada</p><p class="price">9,50€</p></div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-ensaladas">
+      <div class="menu-grid">
+        <div class="menu-card"><h4>Ensalada mixta</h4><p>Lechuga, tomate, atún, espárragos, aceitunas y huevo cocido</p><p class="price">8,00€</p></div>
+        <div class="menu-card"><h4>Ensalada de la casa</h4><p>Lechuga, tomate, espárragos, zanahoria, queso de cabra, bacon, pan tostado, salsa César y huevo cocido</p><p class="price">12,00€</p></div>
+      </div>
+    </div>
+
+    <div class="personaliza">
+      <h3>Personaliza tu plato añadiendo...</h3>
+      <div class="personaliza-grid">
+        <div class="personaliza-item"><span>Ingrediente extra</span><span>0,50€</span></div>
+        <div class="personaliza-item"><span>Huevos</span><span>1,50€</span></div>
+        <div class="personaliza-item"><span>Queso de cabra</span><span>1,50€</span></div>
+        <div class="personaliza-item"><span>Pan</span><span>0,60€</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="highlights">
+  <div class="highlights-inner">
+    <div class="highlight-item">🍽️ Menú del Día · 22€</div>
+    <div class="highlight-item">⚡ Rapidez en Cocina</div>
+    <div class="highlight-item">🥡 Pedidos para Llevar</div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="container">
+    <div class="section-badge fade-in">Galería</div>
+    <div class="gallery-grid fade-in">
+      <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600" alt="Comida"/>
+      <img src="https://images.unsplash.com/photo-1544025162-d76594e559e4?w=600" alt="Carne a la parrilla"/>
+      <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600" alt="Hamburguesa"/>
+      <img src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=600" alt="Platos variados"/>
+      <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600" alt="Restaurante"/>
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600" alt="Interior del bar"/>
+    </div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" id="lightboxClose">×</span>
+  <img id="lightboxImg" src="" alt=""/>
+</div>
+
+<section id="reviews">
+  <div class="container">
+    <div class="section-badge fade-in">Lo que dicen nuestros clientes</div>
+    <div class="rating-badge fade-in">⭐ 4,4 / 5 · 67 reseñas en Google</div>
+    <div class="reviews-grid fade-in">
+      <div class="review-card"><p>"La comida es abundante y de sabores muy ricos, totalmente recomendable."</p><span class="reviewer">— Cliente de Google</span></div>
+      <div class="review-card"><p>"La comida buenísima, lo mejor el pulpo y la atención. Para repetir."</p><span class="reviewer">— Cliente de Google</span></div>
+      <div class="review-card"><p>"No dejéis de probar las patatas alioli y las hamburguesas."</p><span class="reviewer">— Cliente de Google</span></div>
+      <div class="review-card"><p>"Comida muy rica y cantidades grandes. Precio menú 22€. Del todo aconsejado."</p><span class="reviewer">— Cliente de Google</span></div>
+      <div class="review-card"><p>"Un sitio súper acogedor. La persona que nos atendió un encanto, atento y simpático. La velocidad en cocina es destacable y la calidad de los platos es un 10."</p><span class="reviewer">— Cliente de Google</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="section-badge fade-in">Contacto</div>
+    <div class="contact-grid fade-in">
+      <div class="contact-info">
+        <div class="contact-phone">📞 613 76 80 23</div>
+        <a href="tel:613768023" class="btn-red" style="width:fit-content">Llamar Ahora</a>
+        <div class="contact-detail"><span>📍</span><span>C. Las Monjas, 24240 Santa María del Páramo, León</span></div>
+        <div class="contact-detail"><span>🕐</span><span>10:00 – 22:00</span></div>
+        <div class="contact-detail"><span>💶</span><span>10–20 € por persona</span></div>
+        <a href="https://maps.google.com/?q=C.+Las+Monjas,+24240+Santa+María+del+Páramo,+León" target="_blank" class="btn-red" style="width:fit-content">Cómo Llegar</a>
+      </div>
+      <div class="map-wrapper">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2983.0!2d-5.7586!3d42.3568!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDLCsDIxJzI0LjUiTiA1wrA0NSczMS4wIlc!5e0!3m2!1ses!2ses!4v1" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Bar Las Piscinas</div>
+  <div class="footer-links">
+    <a href="#about">Inicio</a>
+    <a href="#menu">Carta</a>
+    <a href="#gallery">Galería</a>
+    <a href="#reviews">Reseñas</a>
+    <a href="#contact">Contacto</a>
+  </div>
+  <p class="footer-info">📞 613 76 80 23 · C. Las Monjas, 24240 Santa María del Páramo, León</p>
+  <p class="footer-info">© 2024 Bar Las Piscinas · Santa María del Páramo, León</p>
+  <p class="footer-disclaimer">Acceso al bar independiente de la piscina municipal.</p>
+</footer>
+
+<button id="back-top" aria-label="Volver arriba">↑</button>
+
+<script>
+const hamburger=document.getElementById('hamburger');
+const navLinks=document.getElementById('navLinks');
+hamburger.addEventListener('click',()=>navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('open')));
+
+const tabBtns=document.querySelectorAll('.tab-btn');
+const tabPanels=document.querySelectorAll('.tab-panel');
+tabBtns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    tabBtns.forEach(b=>b.classList.remove('active'));
+    tabPanels.forEach(p=>{p.style.display='none';p.classList.remove('active')});
+    btn.classList.add('active');
+    const panel=document.getElementById('tab-'+btn.dataset.tab);
+    panel.style.display='block';
+    panel.classList.add('active');
+  });
+});
+tabPanels.forEach((p,i)=>{p.style.display=i===0?'block':'none'});
+
+const lightbox=document.getElementById('lightbox');
+const lightboxImg=document.getElementById('lightboxImg');
+document.querySelectorAll('.gallery-grid img').forEach(img=>{
+  img.addEventListener('click',()=>{lightboxImg.src=img.src;lightbox.classList.add('open')});
+});
+document.getElementById('lightboxClose').addEventListener('click',()=>lightbox.classList.remove('open'));
+lightbox.addEventListener('click',e=>{if(e.target===lightbox)lightbox.classList.remove('open')});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')lightbox.classList.remove('open')});
+
+const backTop=document.getElementById('back-top');
+window.addEventListener('scroll',()=>{
+  backTop.classList.toggle('visible',window.scrollY>400);
+});
+backTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:.15});
+document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
